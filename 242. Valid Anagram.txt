@@ -1,0 +1,73 @@
+// Input: s = "anagram", t = "nagaram"
+// Output: true
+
+// Input: s = "rat", t = "car"
+// Output: false
+
+// Sorting the Array and comparing -> O(nlog(n))
+class Solution {
+    public boolean isAnagram(String s, String t) {
+		char[] cs = s.toCharArray();
+		char[] ct = t.toCharArray();
+		
+		Arrays.sort(cs);
+		Arrays.sort(ct);
+		
+		if(cs.length!=ct.length())	return false;
+		
+		for(int i=0;i<cs.length();i++){
+			if(cs[i]!=ct[i])	return false;
+		}
+		
+		return true;
+	}
+}
+
+// 26 Char Array Hashing() -> O(n)
+class Solution {
+    public boolean isAnagram(String s, String t) {
+	
+		if(s.length()!=t.length())return false;
+	
+		int count[] = new int[26];
+		
+		for(int i=0;i<s.length();i++){
+			count[s.charAt(i)-'a']++;
+		}
+		
+		for(int i=0;i<t.length();i++){
+			count[t.charAt(i)-'a']--;
+		}
+		
+		for(int i:count){
+			if(i!=0)	return false;
+		}
+		
+		return true;
+    }
+}
+
+
+// HashMap 
+class Solution {
+    public boolean isAnagram(String s, String t) {
+		HashMap<Character, Integer> hmap = new HashMap<>();
+		
+		if(s.length()!=t.length())	return false;
+		
+		for (int i=0; i<s.length();i++){
+			hmap.put(s.charAt(i),hmap.getOrDefault(s.charAt(i),0)+1);
+		}
+		
+		for(int i=0; i<t.length();i++){-1
+			hmap.put(t.charAt(i),hmap.getOrDefault(t.charAt(i),0)-1);
+		}
+		
+		for(hmap.Entry<Character,Integer> entry: map.entrySet()){
+			int value = entry.getValue();
+			if(value<0||value>0)	return false;
+		}
+		
+		return true;
+	}
+}
